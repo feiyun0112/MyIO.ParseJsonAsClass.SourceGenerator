@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  
+	  <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <PackageOutputPath>../../NuGet</PackageOutputPath>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>MyIO.ParseJsonAsClass.SourceGenerator</PackageId>
+    <PackageTags>JSON;Class;SourceGenerator</PackageTags>
+   
+    <PackageProjectUrl>https://github.com/feiyun0112/MyIO.ParseJsonAsClass.SourceGenerator</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/feiyun0112/MyIO.ParseJsonAsClass.SourceGenerator</RepositoryUrl>
+    <Authors>MyIO</Authors>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <Description>
+使用 Source generator 实现类似于 Visual Studio 菜单“编辑”&gt;"选择性粘贴"&gt;"将 JSON 粘贴为类"的功能，将 JSON 字符串转换为 C# 类。
+    </Description>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.0" GeneratePathProperty="true" PrivateAssets="all" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+	</PropertyGroup>
+
+	<Target Name="GetDependencyTargetPaths">
+		<ItemGroup>
+            <TargetPathWithTargetPlatformMoniker Include="$(PKGSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" IncludeRuntimeDependency="false" />
+		</ItemGroup>
+	</Target>
+	
+  <ItemGroup>
+    <Compile Include="../Common/**/*.cs" Exclude="../Common/**/*.Reflection.cs;../Common/**/*.Emit.cs" LinkBase="Common" />
+    <None Remove="bin\Debug\netstandard2.0\\MyIO.ParseJsonAsClass.SourceGenerator.dll" />
+ 
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+ <ItemGroup>
+ 
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+ 
+    </ItemGroup>
+</Project>
