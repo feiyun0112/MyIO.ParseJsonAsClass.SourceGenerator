@@ -24,7 +24,7 @@ Add a JSON file in the project
   "data": [
     "1","2"
   ],
-  "arrar": [
+  "array": [
     {"a":1.0},
     {"a":null}
   ]
@@ -53,3 +53,5 @@ namespace ConsoleApp1
 4. 编译项目
 
 Build the project
+
+![](demo.jpg)
